@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>CRM Тесты</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+        }
+        .test-pass { color: #4ec9b0; }
+        .test-fail { color: #f48771; }
+        hr { border-color: #333; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Запуск тестов CRM</h1>
+    <hr>
+    <div id="output"></div>
+    
+    <script type="module">
+        import { testProductModel } from '../js/models/Product.js';
+        import { testCategoryModel } from '../js/models/Category.js';
+        import { testCartModel } from '../js/models/Cart.js';
+        
+        const output = document.getElementById('output');
+        
+        function log(message, isError = false) {
+            const div = document.createElement('div');
+            div.textContent = message;
+            div.style.color = isError ? '#f48771' : '#4ec9b0';
+            output.appendChild(div);
+        }
+        
+        // Перехватываем console.log
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            log(args.join(' '));
+        };
+        
+        console.error = function(...args) {
+            originalLog.apply(console, args);
+            log(args.join(' '), true);
+        };
+        
+        // Запускаем тесты
+        try {
+            testProductModel();
+            testCategoryModel();
+            testCartModel();
+            log('\n🎉 Все тесты успешно пройдены!');
+        } catch (e) {
+            log(`\n💥 Ошибка: ${e.message}`, true);
+        }
+    </script>
+</body>
+</html>
