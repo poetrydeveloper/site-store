@@ -1,6 +1,6 @@
 // Конфигурация Supabase (замените на свои данные)
 const SUPABASE_URL = 'https://katbfftwcnnyefjthevq.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_LFdIXDm_u_mFjlzxTMDOTQ_PaHwExaQ';
+const SUPABASE_ANON_KEY = 'sb_publishable_hhAdy8LqqKGBXRjgrbABfQ_ExpJckHw';
 
 // Создаём клиент
 window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
