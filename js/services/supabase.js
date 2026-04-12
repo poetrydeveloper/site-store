@@ -1,9 +1,11 @@
-// Конфигурация Supabase (замените на свои данные)
+// Конфигурация Supabase
 const SUPABASE_URL = 'https://katbfftwcnnyefjthevq.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_LFdIXDm_u_mFjlzxTMDOTQ_PaHwExaQ';
 
-// Создаём клиент
-window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Создаём клиент с отключением realtime (убирает ошибку payload)
+window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    realtime: { enabled: false }
+});
 
 // Функции для работы с товарами
 export async function getProducts() {
