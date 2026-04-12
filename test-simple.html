@@ -11,14 +11,15 @@
     
     <script>
         // ВАШИ ДАННЫЕ
-        const url = 'https://katbfftwcnnyefjthevq.supabase.co';
-        const key = 'sb_publishable_LFdIXDm_u_mFjlzxTMDOTQ_PaHwExaQ';
+        const SUPABASE_URL = 'https://katbfftwcnnyefjthevq.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_LFdIXDm_u_mFjlzxTMDOTQ_PaHwExaQ';
         
         console.log('1. Создаю клиент...');
-        const supabase = window.supabase.createClient(url, key);
+        // Используем другое имя переменной, чтобы избежать конфликта
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         
         console.log('2. Отправляю запрос...');
-        supabase.from('products').select('*').then(result => {
+        supabaseClient.from('products').select('*').then(result => {
             console.log('3. Получил результат:', result);
             
             const div = document.getElementById('result');
