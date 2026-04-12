@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Простой тест Supabase</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Тест подключения к Supabase</h1>
+    <div id="result">Проверяю...</div>
+    
+    <script>
+        // ВАШИ ДАННЫЕ
+        const url = 'https://katbfftwcnnyefjthevq.supabase.co';
+        const key = 'sb_publishable_LFdIXDm_u_mFjlzxTMDOTQ_PaHwExaQ';
+        
+        console.log('1. Создаю клиент...');
+        const supabase = window.supabase.createClient(url, key);
+        
+        console.log('2. Отправляю запрос...');
+        supabase.from('products').select('*').then(result => {
+            console.log('3. Получил результат:', result);
+            
+            const div = document.getElementById('result');
+            if (result.error) {
+                div.innerHTML = `❌ Ошибка:<br><pre>${JSON.stringify(result.error, null, 2)}</pre>`;
+                div.style.color = 'red';
+            } else {
+                div.innerHTML = `✅ Успех! Найдено товаров: ${result.data.length}<br><br><pre>${JSON.stringify(result.data, null, 2)}</pre>`;
+                div.style.color = 'green';
+            }
+        }).catch(err => {
+            console.error('catch:', err);
+            document.getElementById('result').innerHTML = `❌ Исключение: ${err.message}`;
+        });
+    </script>
+</body>
+</html>
