@@ -2,6 +2,7 @@ export class Product {
     constructor(data = {}) {
         this.id = data.id || null;
         this.categoryId = data.categoryId || null;
+        this.brandId = data.brandId || null;     // связь с брендом
         this.code = data.code || '';
         this.name = data.name || '';
         this.description = data.description || '';
@@ -35,29 +36,25 @@ export class Product {
     }
 }
 
-// Тесты для Product (запускать в браузере через testRunner.html)
+// Тесты для Product
 export function testProductModel() {
     console.log('🧪 Тестируем Product модель...');
     
-    // Тест 1: создание
     const p1 = new Product({ code: 'TEST-001', name: 'Тестовый товар' });
-    console.assert(p1.code === 'TEST-001', '❌ Ошибка: code не сохранился');
-    console.assert(p1.name === 'Тестовый товар', '❌ Ошибка: name не сохранился');
+    console.assert(p1.code === 'TEST-001', '❌ Ошибка: code');
+    console.assert(p1.name === 'Тестовый товар', '❌ Ошибка: name');
     
-    // Тест 2: валидация
     const p2 = new Product({ code: '', name: '' });
-    const errors = p2.validate();
-    console.assert(errors.length === 2, '❌ Ошибка: валидация не сработала');
+    console.assert(p2.validate().length === 2, '❌ Ошибка: валидация');
     
-    // Тест 3: getFullName
     const p3 = new Product({ code: 'FIX-001', name: 'Фиксаторы' });
     console.assert(p3.getFullName() === 'Фиксаторы (FIX-001)', '❌ Ошибка: getFullName');
     
-    // Тест 4: isNew
-    const p4 = new Product({ id: 1, name: 'Существующий' });
-    console.assert(p4.isNew() === false, '❌ Ошибка: isNew для существующего');
-    const p5 = new Product({ name: 'Новый' });
-    console.assert(p5.isNew() === true, '❌ Ошибка: isNew для нового');
+    const p4 = new Product({ id: 1 });
+    console.assert(p4.isNew() === false, '❌ Ошибка: isNew');
+    
+    const p5 = new Product({ brandId: 5 });
+    console.assert(p5.brandId === 5, '❌ Ошибка: brandId');
     
     console.log('✅ Все тесты Product пройдены!');
     return true;

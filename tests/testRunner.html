@@ -24,6 +24,7 @@
         import { testProductModel } from '../js/models/Product.js';
         import { testCategoryModel } from '../js/models/Category.js';
         import { testCartModel } from '../js/models/Cart.js';
+        import { testProductUnitModel } from '../js/models/ProductUnit.js';
         
         const output = document.getElementById('output');
         
@@ -51,6 +52,7 @@
             testProductModel();
             testCategoryModel();
             testCartModel();
+            testProductUnitModel();
             log('\n🎉 Все тесты успешно пройдены!');
         } catch (e) {
             log(`\n💥 Ошибка: ${e.message}`, true);
